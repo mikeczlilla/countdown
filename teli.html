@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Téli szünet</title>
+    <title>Őszi szünet</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -19,10 +19,10 @@
         </div>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="kartyaweb.html">Őszi szünet</a>
-            <a href="kartyaismerteto.html">Téli szünet</a>
-            <a href="kartyaJ.php" >Tavaszi szünet</a>
-            <a href="keszitok.html">Nyári szünet</a>
+            <a href="index.html">Főoldal</a>
+            <a href="teli.html">Őszi szünet</a>
+            <a href="tvaszi.html" >Tavaszi szünet</a>
+            <a href="nyari.html">Nyári szünet</a>
             <div class="something">
                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
            </div>
@@ -33,7 +33,55 @@
 
     </nav>
 
-    <script>
+    
+
+    <style>
+    p {
+      text-align: center;
+      font-size: 60px;
+      margin-top: 0px;
+      color: #02376b;
+    }
+    </style>
+
+<body>
+  <style>
+    #vmi {
+      margin: auto;
+      display: block;
+      width: 450px;
+      height: 350px;
+    }
+  </style>
+  <br>
+  <br>
+  <br>
+  <h1 style="text-align: center; font-size: 100px; color: #DBE4EE">Téli szünet visszaszámláló</h1>
+  <p id="demo"></p>
+
+  <script>
+    var countDownDate = new Date("dec 19, 2026 00:00:00").getTime();
+
+    var x = setInterval(function () {
+
+      var now = new Date().getTime();
+
+      var distance = countDownDate - now;
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("demo").innerHTML = days + "nap " + hours + "óra "
+        + minutes + "perc " + seconds + "másodperc ";
+
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "Itt a szünet.";
+      }
+    }, 1000);
+
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
@@ -42,15 +90,5 @@
             document.getElementById("mySidenav").style.width = "0";
         }
     </script>
-
-
-
-
-
-
-
-
-
-    
 </body>
 </html>
