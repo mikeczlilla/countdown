@@ -58,7 +58,9 @@ nav a:hover {
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  color: #00508f;
+  background-color: #DBE4EE;
+
 }
 
 .sidenav .closebtn {
