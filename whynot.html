@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Style Lyrics</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; 
+        }
+
+        #countdown {
+            font-size: 1.5rem;
+            color: #1db954; 
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        #lyrics-viewport {
+            height: 200px;
+            overflow: hidden;
+            position: absolute; 
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+
+    top: 100px; 
+}
+        #lyrics-container {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(0);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+        }
+
+        .line {
+            font-size: 1.8rem;
+            color: #535353; 
+            margin: 20px 0;
+            transition: color 0.6s ease, opacity 0.6s ease, transform 0.6s ease;
+            opacity: 0.3;
+        }
+
+        .line.active {
+            color: #ffffff; 
+            opacity: 1;
+            transform: scale(1.05);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown">Starting in: 3</div>
+
+    <div id="lyrics-viewport">
+        <div id="lyrics-container">
+            <div class="line" data-time="0">This is the end</div>
+            <div class="line" data-time="4000">Hold your breath and count to ten</div>
+            <div class="line" data-time="9500">Feel the Earth move and then</div>
+            <div class="line" data-time="14000">Hear my heart burst again</div>
+        </div>
+    </div>
+
+    <script>
+        const countdownEl = document.getElementById('countdown');
+        const container = document.getElementById('lyrics-container');
+        const lines = document.querySelectorAll('.line');
+        
+        let count = 3;
+        
+        const timer = setInterval(() => {
+            count--;
+            if (count > 0) {
+                countdownEl.textContent = `Starting in: ${count}`;
+            } else {
+                clearInterval(timer);
+                countdownEl.textContent = ""; 
+                startLyrics();
+            }
+        }, 1000);
+
+        function startLyrics() {
+            const startTime = Date.now();
+
+            function updateLyrics() {
+                const elapsedTime = Date.now() - startTime;
+                let activeIndex = -1;
+
+                lines.forEach((line, index) => {
+                    const targetTime = parseInt(line.getAttribute('data-time'));
+
+                    let nextTime = lines[index + 1] ? parseInt(lines[index + 1].getAttribute('data-time')) : targetTime + 3000;
+
+                    if (elapsedTime >= targetTime && elapsedTime < nextTime) {
+                        activeIndex = index;
+                    }
+                });
+
+                if (activeIndex !== -1) {
+                    lines.forEach((line, index) => {
+                        if (index === activeIndex) {
+                            line.classList.add('active');
+                        } else {
+                            line.classList.remove('active');
+                        }
+                    });
+
+                    const offset = activeIndex * -80; 
+                    container.style.transform = `translateY(${offset}px)`;
+                }
+
+                requestAnimationFrame(updateLyrics);
+            }
+
+            requestAnimationFrame(updateLyrics);
+        }
+    </script>
+
+</body>
+</html>
