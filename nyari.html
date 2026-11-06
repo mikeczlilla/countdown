@@ -1,96 +1,361 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NYári szünet</title>
-    <link rel="stylesheet" href="index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nyári szünet</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 119, 190, 0.25),
+            rgba(255, 180, 80, 0.25)
+        ),
+        url("nyar.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+
+
+
+nav {
+    background: rgba(0, 91, 125, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 15px 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.menu-icon {
+    font-size: 35px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.menu-icon:hover {
+    color: #ffd166;
+    transform: scale(1.1);
+}
+
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+
+    background: linear-gradient(
+        180deg,
+        #0077b6,
+        #00b4d8
+    );
+
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 70px;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+}
+
+.sidenav a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    background: rgba(255,255,255,0.2);
+    color: #ffd166;
+    padding-left: 35px;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 40px;
+}
+
+
+
+#nyar {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.badge {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: white;
+}
+
+h1 {
+    font-size: clamp(35px, 7vw, 75px);
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: clamp(20px, 4vw, 35px);
+    font-weight: 500;
+    color: #fff4d6;
+    margin-bottom: 35px;
+}
+
+
+
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: min(800px, 100%);
+    margin: 0 auto;
+}
+
+.time-box {
+    background: rgba(0, 80, 110, 0.55);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 25px;
+    padding: 25px 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.time-box:hover {
+    transform: translateY(-8px);
+    background: rgba(0, 120, 160, 0.7);
+}
+
+.time-box span {
+    display: block;
+    font-size: clamp(30px, 5vw, 60px);
+    font-weight: bold;
+    color: #ffd166;
+}
+
+.time-box small {
+    font-size: 15px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+
+.footer-text {
+    margin-top: 35px;
+    font-size: 18px;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+
+
+@media (max-width: 600px) {
+
+    nav {
+        padding: 12px 20px;
+    }
+
+    .countdown {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .time-box {
+        padding: 20px 10px;
+        border-radius: 18px;
+    }
+
+    .footer-text {
+        font-size: 15px;
+    }
+}
+</style>
 </head>
+
 <body>
+<div id="mySidenav" class="sidenav">
+
+        <a href="javascript:void(0)"
+           class="closebtn"
+           onclick="closeNav()">×</a>
+
+        <a href="index.html">🏠 Főoldal</a>
+        <a href="oszi.html">🍂 Őszi szünet</a>
+        <a href="teli.html">❄️ Téli szünet</a>
+        <a href="tvaszi.html">🌸 Tavaszi szünet</a>
+        <a href="13last.html">🎓 13. évfolyam</a>
+
+    </div>
+<nav>
+    <div class="nav-container">
+
+        <img src="./kepek/logo2.png"
+             alt="Logo"
+             class="logo">
+
+        <span class="menu-icon"
+              onclick="openNav()">☰</span>
+
+    </div>
+
     
-    <nav>
+</nav>
 
-        <div class="grid-2">
-            <img src="./kepek/logo2.png" alt="">
+<div id="nyar">
 
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+    <div class="badge">
+        ☀️ VAKÁCIÓ VISSZASZÁMLÁLÓ ☀️
+    </div>
 
+    <h1>Nyári szünet</h1>
 
+    <h2>
+        Már csak ennyi van hátra az utolsó tanítási napig! 🌴
+    </h2>
+
+    <div class="countdown">
+
+        <div class="time-box">
+            <span id="days">0</span>
+            <small>Nap</small>
         </div>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="index.html">Főoldal</a>
-            <a href="teli.html">Őszi szünet</a>
-            <a href="teli.html">Téli szünet</a>
-            <a href="tvaszi.html" >Tavaszi szünet</a>
-            <a href="13last.html">13. évfolyam</a>
-            <div class="something">
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-           </div>
-            
-        </div> 
+
+        <div class="time-box">
+            <span id="hours">0</span>
+            <small>Óra</small>
+        </div>
+
+        <div class="time-box">
+            <span id="minutes">0</span>
+            <small>Perc</small>
+        </div>
+
+        <div class="time-box">
+            <span id="seconds">0</span>
+            <small>Másodperc</small>
+        </div>
+
+    </div>
+
+    <p class="footer-text">
+        🏖️ Napfény, strand, szabadság és kaland! 🌊
+    </p>
+
+</div>
+
+<script>
 
 
 
-    </nav>
+var countDownDate =
+    new Date("June 15, 2027 00:00:00").getTime();
 
-    
+var x = setInterval(function () {
 
-    <style>
-    p {
-      text-align: center;
-      font-size: 60px;
-      margin-top: 0px;
-      color: #02376b;
-    }
-    </style>
+    var now = new Date().getTime();
 
-<body>
-  <style>
-    #vmi {
-      margin: auto;
-      display: block;
-      width: 450px;
-      height: 350px;
-    }
-  </style>
-  <br>
-  <br>
-  <br>
-  <h1 style="text-align: center; font-size: 100px; color: #DBE4EE">Nyári szünet visszaszámláló</h1>
-  <h2 style="text-align: center; font-size: 80px; color: #DBE4EE" >(Utolsó tanítási nap)</h2>
-  <p id="demo"></p>
+    var distance = countDownDate - now;
 
-  <script>
-    var countDownDate = new Date("jun 15, 2027 00:00:00").getTime();
+    if (distance <= 0) {
 
-    var x = setInterval(function () {
-
-      var now = new Date().getTime();
-
-      var distance = countDownDate - now;
-
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("demo").innerHTML = days + "nap " + hours + "óra "
-        + minutes + "perc " + seconds + "másodperc ";
-
-      if (distance < 0) {
         clearInterval(x);
-        document.getElementById("demo").innerHTML = "Itt a szünet.";
-      }
-    }, 1000);
 
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
+        document.getElementById("nyar").innerHTML =
+            "<h1>☀️ Itt a nyári szünet! 🏖️</h1>";
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    </script>
+        return;
+    }
+
+    var days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+    );
+
+    var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+    var minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    var seconds = Math.floor(
+        (distance % (1000 * 60)) / 1000
+    );
+
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+}, 1000);
+
+
+
+
+function openNav() {
+
+    document.getElementById("mySidenav").style.width =
+        "250px";
+
+}
+
+function closeNav() {
+
+    document.getElementById("mySidenav").style.width =
+        "0";
+
+}
+
+</script>
+
 </body>
 </html>
